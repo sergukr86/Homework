@@ -8,7 +8,7 @@ def parse(query: str) -> dict:
             if key_value == "":
                 data.remove(key_value)
             else:
-                name, description = key_value.split("=")
+                name, description = key_value.split("=",1 )
                 person_data[name] = description
         print(person_data)
     else:
@@ -25,7 +25,21 @@ if __name__ == '__main__':
 
 
 def parse_cookie(query: str) -> dict:
-    return {}
+    person_data = {}
+    if 'name' in query:
+        data = query.split(";")
+        print(data)
+        for key_value in data:
+            if key_value == "":
+                data.remove(key_value)
+            else:
+                print(key_value)
+                name, description = key_value.split("=",1)
+                person_data[name] = description
+        print(person_data)
+    else:
+        pass
+    return person_data
 
 
 if __name__ == '__main__':
