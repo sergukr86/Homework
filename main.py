@@ -1,5 +1,19 @@
+import re
+
 def parse(query: str) -> dict:
-    return {}
+    person_data = {}
+    if 'name' in query:
+        data = re.split("\?", query)[1].split("&")
+        for key_value in data:
+            if key_value == "":
+                data.remove(key_value)
+            else:
+                name, description = key_value.split("=")
+                person_data[name] = description
+        print(person_data)
+    else:
+        pass
+    return person_data
 
 
 if __name__ == '__main__':
@@ -11,7 +25,7 @@ if __name__ == '__main__':
 
 
 def parse_cookie(query: str) -> dict:
-    return {
+    return {}
 
 
 if __name__ == '__main__':
