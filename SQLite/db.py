@@ -15,17 +15,14 @@ def create_track(num):
     fake = Faker()
     data = []
     for i in range(0, num):
-        data.append((fake.name(), fake.date(), int(round(random.random(), 3) * 1000)))
+        data.append((fake.name(), fake.date_between(), int(round(random.random(), 3) * 1000)))
     return data
 
 
 con = sqlite3.connect("music.db")
 cur = con.cursor()
-cur.execute('DROP TABLE IF EXISTS customers')
-con.commit()
 
-con = sqlite3.connect("music.db")
-cur = con.cursor()
+cur.execute("DROP TABLE IF EXISTS customers;")
 cur.execute('''CREATE TABLE customers (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name VARCHAR NOT NULL,
@@ -33,9 +30,7 @@ cur.execute('''CREATE TABLE customers (
             age VARCHAR(2)
             )''')
 
-
-con = sqlite3.connect("music.db")
-cur = con.cursor()
+cur.execute("DROP TABLE IF EXISTS tracks;")
 cur.execute('''CREATE TABLE tracks (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             artist VARCHAR NOT NULL,
@@ -46,8 +41,7 @@ cur.execute('''CREATE TABLE tracks (
 customer_data = create_cust(100)
 cur.executemany("INSERT INTO customers (name, address, age) VALUES (?, ?, ?)", customer_data)
 
-
 track_data = create_track(100)
-cur.executemany("INSERT INTO tracks (artist, release_date, lasting_time) VALUES (?, ?, ?)", customer_data)
+cur.executemany("INSERT INTO tracks (artist, release_date, lasting_time) VALUES (?, ?, ?)", track_data)
 
 con.commit()
