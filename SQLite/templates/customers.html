@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+{% block body %}
+<div class="container" mt-5>
+    <h2>Database "music.db", show unique first names</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in f_name %}
+            <tr>
+                <td>{{ row[0] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
+</html>
