@@ -1,6 +1,6 @@
-from flask import Flask, render_template
 import sqlite3
 
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -20,7 +20,7 @@ def tracks():
     return render_template("music.html", cnt_lines=cnt_lines)
 
 
-@app.route("/customers")
+@app.route("/names")
 def customers():
     con = sqlite3.connect("music.db")
     cur = con.cursor()
@@ -40,5 +40,5 @@ def duration():
     return render_template("tracks.html", tracks_info=tracks_info)
 
 
-if __name__ == "__main-__":
+if __name__ == "__main__":
     app.run(debug=True)
